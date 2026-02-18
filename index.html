@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartelera de Normalización</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Kalam:wght@400;700&family=Gochi+Hand&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --marker-blue: #0056b3;
+            --marker-red: #d00000;
+            --marker-black: #222222;
+            --marker-green: #2d6a4f;
+            --highlighter: #fef08a;
+            --paper: #fffef2;
+        }
+
+        body {
+            background-color: #abb2b9;
+            background-image: 
+                linear-gradient(90deg, #95a5a6 1px, transparent 1px),
+                linear-gradient(#95a5a6 1px, transparent 1px);
+            background-size: 40px 40px;
+            font-family: 'Kalam', cursive;
+            padding: 20px;
+        }
+
+        /* Efecto de papel de cartelera */
+        .cartelera {
+            background: var(--paper);
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 30px 30px;
+            box-shadow: 15px 15px 0px rgba(0,0,0,0.1);
+            border: 4px solid var(--marker-black);
+            position: relative;
+            max-width: 1000px;
+            margin: auto;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        /* Títulos estilo marcador */
+        .titulo-hand {
+            font-family: 'Permanent Marker', cursive;
+            color: var(--marker-blue);
+            line-height: 1.1;
+            transform: rotate(-1deg);
+        }
+
+        .subtitulo-hand {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            color: var(--marker-red);
+            font-weight: 700;
+        }
+
+        /* Botones estilo dibujo */
+        .btn-sketch {
+            font-family: 'Permanent Marker', cursive;
+            border: 3px solid var(--marker-black);
+            background: white;
+            padding: 10px 20px;
+            box-shadow: 4px 4px 0px var(--marker-black);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-sketch:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--marker-black);
+        }
+
+        .btn-sketch.active {
+            background: var(--highlighter);
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--marker-black);
+        }
+
+        /* Tablas tipo boceto */
+        .table-sketch {
+            border: 4px solid var(--marker-black);
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.05);
+        }
+
+        .table-sketch th, .table-sketch td {
+            border: 3px solid var(--marker-black);
+            padding: 10px;
+            font-family: 'Gochi Hand', cursive;
+            font-size: 1.2rem;
+        }
+
+        .table-sketch th {
+            background: #eef2ff;
+            color: var(--marker-blue);
+        }
+
+        /* Notas y tachones */
+        .nota-postit {
+            background: #ffcfd2;
+            padding: 20px;
+            border: 3px solid #f28482;
+            transform: rotate(2deg);
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .highlighter-text {
+            background: var(--highlighter);
+            padding: 0 5px;
+            border-radius: 4px;
+        }
+
+        .tachado-rojo {
+            text-decoration: line-through;
+            text-decoration-color: var(--marker-red);
+            text-decoration-thickness: 4px;
+        }
+
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: paperSlide 0.4s ease-out; }
+
+        @keyframes paperSlide {
+            from { transform: translateY(20px) rotate(1deg); opacity: 0; }
+            to { transform: translateY(0) rotate(0deg); opacity: 1; }
+        }
+
+        .flecha-dibujada {
+            font-size: 3rem;
+            color: var(--marker-green);
+            font-family: 'Caveat', cursive;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cartelera p-6 md:p-12">
+        
+        <!-- Encabezado -->
+        <header class="text-center mb-10">
+            <h1 class="titulo-hand text-5xl md:text-7xl mb-4">NORMALIZACIÓN DE DB</h1>
+            <p class="text-2xl font-bold text-gray-600 underline decoration-wavy decoration-blue-500">
+                Guía Visual: ¡De un desastre a un Pro! ✍️
+            </p>
+        </header>
+
+        <!-- Navegación -->
+        <nav class="flex flex-wrap justify-center gap-4 mb-12">
+            <button onclick="show(0)" id="b0" class="btn-sketch active">EL CAOS</button>
+            <button onclick="show(1)" id="b1" class="btn-sketch">1FN (ÁTOMOS)</button>
+            <button onclick="show(2)" id="b2" class="btn-sketch">3FN (FINAL)</button>
+        </nav>
+
+        <!-- Pasos -->
+        <section id="content">
+            
+            <!-- STEP 0 -->
+            <div id="s0" class="step-content active">
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div>
+                        <h2 class="subtitulo-hand mb-4">Estado: Sin Normalizar</h2>
+                        <table class="table-sketch">
+                            <thead>
+                                <tr><th>Nombre</th><th>País</th><th>Médico</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>J. Carlos</td><td>España</td><td>Perez, J.</td></tr>
+                                <tr><td>Carlos A.</td><td class="tachado-rojo">México</td><td>Perez, J.</td></tr>
+                                <tr><td>Juan S.</td><td>México</td><td>Lopez, M.</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="mt-4 font-bold text-lg">⚠️ Problema: ¡Escribimos "Perez, J." mil veces!</p>
+                    </div>
+                    <div class="nota-postit">
+                        <h3 class="font-bold text-2xl mb-2">¡OJO AQUÍ! 📝</h3>
+                        <p>Si el médico cambia de nombre, tenemos que borrar y escribir de nuevo en cada fila.</p>
+                        <p class="mt-2 text-red-600 font-bold">Inconsistencia = Error fatal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 1 -->
+            <div id="s1" class="step-content">
+                <h2 class="subtitulo-hand mb-4">1FN: Definir la Identidad</h2>
+                <div class="bg-white p-6 border-4 border-dashed border-blue-400 mb-6">
+                    <table class="table-sketch">
+                        <thead>
+                            <tr>
+                                <th class="bg-yellow-100">ID_PACIENTE</th>
+                                <th>Nombre</th>
+                                <th>País</th>
+                                <th>Médico</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>101</td><td>J. Carlos</td><td>España</td><td>Perez, J.</td></tr>
+                            <tr><td>102</td><td>Carlos A.</td><td>México</td><td>Perez, J.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <span class="highlighter-text font-bold text-xl">Regla: ¡Valores únicos por celda y llave primaria obligatoria!</span>
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div id="s2" class="step-content text-center">
+                <h2 class="subtitulo-hand mb-6">3FN: El Esquema Perfecto 🏆</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="border-4 border-black p-4 bg-blue-50 transform rotate-1">
+                        <h4 class="font-bold underline">TABLA PACIENTES</h4>
+                        <p class="text-sm">ID_PACIENTE (PK)</p>
+                        <p class="text-sm">Nombre</p>
+                        <p class="text-sm text-blue-600">ID_PAIS (FK)</p>
+                    </div>
+                    <div class="border-4 border-black p-4 bg-green-50 transform -rotate-2">
+                        <h4 class="font-bold underline">TABLA MEDICOS</h4>
+                        <p class="text-sm">ID_MEDICO (PK)</p>
+                        <p class="text-sm">Nombre_Med</p>
+                    </div>
+                    <div class="border-4 border-black p-4 bg-red-50">
+                        <h4 class="font-bold underline">TABLA PAISES</h4>
+                        <p class="text-sm">ID_PAIS (PK)</p>
+                        <p class="text-sm">Nombre_Pais</p>
+                    </div>
+                </div>
+
+                <div class="flecha-dibujada">⤴️ ⤵️</div>
+                
+                <div class="max-w-md mx-auto bg-white border-2 border-black p-4 mt-4 shadow-xl">
+                    <h3 class="font-bold text-marker-green italic">"Todo depende de la clave, solo de la clave, y de nada más que de la clave. ¡Amén!"</h3>
+                </div>
+            </div>
+
+        </section>
+
+        <footer class="mt-12 pt-6 border-t-2 border-black flex justify-between items-center italic">
+            <span>Dibujado por: SQL Expert</span>
+            <span class="text-sm">© 2024 - Apuntes de Clase</span>
+        </footer>
+
+    </div>
+
+    <script>
+        function show(idx) {
+            // Contenido
+            document.querySelectorAll('.step-content').forEach((c, i) => {
+                c.classList.toggle('active', i === idx);
+            });
+            // Botones
+            document.querySelectorAll('.btn-sketch').forEach((b, i) => {
+                b.classList.toggle('active', i === idx);
+            });
+        }
+    </script>
+</body>
+</html>
